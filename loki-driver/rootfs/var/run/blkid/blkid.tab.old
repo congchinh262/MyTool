@@ -1,0 +1,2 @@
+<device DEVNO="0xfd04" TIME="1608878722.934896" UUID="620d488d-4556-4f9c-9c60-e7940f60cc6e" TYPE="ext4">/dev/mapper/cl-var</device>
+<device DEVNO="0x0803" TIME="1608878722.981254" UUID="3I25LZ-bK0l-oJ64-6kif-oOwJ-Layp-63rkie" TYPE="LVM2_member" PARTUUID="af83ef09-5bb4-402f-973c-09e36159ce93">/dev/sda3</device>

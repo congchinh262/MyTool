@@ -1,0 +1,45 @@
+{
+    "Args": {
+        "Description": "",
+        "Name": "",
+        "Settable": null,
+        "Value": null
+    },
+    "Description": "Loki Logging Driver",
+    "DockerVersion": "17.09.0-ce",
+    "Documentation": "https://github.com/grafana/loki",
+    "Entrypoint": ["/bin/docker-driver"],
+    "Env": [{
+        "Description": "Set log level to output for plugin logs",
+        "Name": "LOG_LEVEL",
+        "Settable": ["value"],
+        "Value": "info"
+    }, {
+        "Description": "Activate pprof debugging endpoint for the given port.",
+        "Name": "PPROF_PORT",
+        "Settable": ["value"],
+        "Value": ""
+    }],
+    "Interface": {
+        "Socket": "loki.sock",
+        "Types": ["docker.logdriver/1.0"]
+    },
+    "IpcHost": false,
+    "Linux": {
+        "AllowAllDevices": false,
+        "Capabilities": null,
+        "Devices": null
+    },
+    "Mounts": null,
+    "Network": {
+        "Type": "host"
+    },
+    "PidHost": false,
+    "PropagatedMount": "",
+    "User": {},
+    "WorkDir": "",
+    "rootfs": {
+        "diff_ids": ["sha256:e5f58e2c60d19f8ce93db37262937c2a368e1394ecadb3f4e4bc62c75818dab2"],
+        "type": "layers"
+    }
+}
