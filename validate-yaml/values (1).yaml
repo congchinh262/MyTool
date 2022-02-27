@@ -1,0 +1,96 @@
+common:
+  namespace: hovang
+  stage: UAT
+  host: 10.207.56.116:8080
+  publicHost: api24.vtmoney.vn
+  basePath: hovang
+
+  useHttps: true
+  debugLog: true
+  allowAnonymous: true
+
+secret:
+  name: uat-elofun-secret
+  dockerConfig:
+    name: elofun-regcred
+
+docker:
+  name: docker
+  registry: nexus.digital.vn
+
+network:
+  name: network
+
+nats:
+  name: nats
+
+  replicas: 1
+
+  image: nats
+  version: latest
+
+cms:
+  name: cms
+
+  # host: localhost
+  path: cms
+
+  replicas: 1
+
+  image: elofun/repo:vds-cms
+  version: 0.0.21
+
+wsGateway:
+  name: wsgw
+
+  # host: localhost
+  path: wsgw
+
+  replicas: 1
+
+  image: elofun/repo:vds-wsgw
+  version: 1.0.1
+
+web:
+  name: web
+
+  replicas: 1
+
+  # host: localhost
+
+  image: elofun/repo:vds-web
+  version: 0.0.31
+
+auth:
+  name: auth
+
+  replicas: 1
+
+  # host: localhost
+
+  image: elofun/nginx-http
+  version: latest
+
+services:
+  name: svs
+
+  # host: localhost
+  path: api
+
+  replicas: 1
+
+  image: elofun/repo:vds-services
+  version: 0.0.36
+
+  redisClusterUrls: redis://10.207.56.44:8379;redis://10.207.56.44:8479;redis://10.207.56.45:8379;redis://10.207.56.45:8479;redis://10.207.56.46:8379;redis://10.207.56.46:8479
+
+  smsEndpoint: http://10.255.63.201:8881/notify/v1/sms
+  notificationEndpoint: http://10.255.63.201:8881/notify/v2/app/notification
+  addMoneyEndpoint: https://merchant.viettelpay.vn:8451/PartnerWS/PartnerAPI?wsdl
+  backListEndpoint: http://10.255.63.201:8881/game/game2021-api/v1/private/blackList
+
+  secureKey:
+    viettelPublic: MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCW0VomTHsZ4VoNCWI4L74ief91bNKeBtbngsAO33DKnM6YY645KhJsw4rYaNllGTpO9iF7vqPVxcQ4dokXvlylo+niE7oUVxPJ1htQs+pt5fcDFZl0QMR3oVUAETmJcBJ368O1hKMSsssf2klBMJJpg8fg49IofEHjm5qkGPqkCQIDAQAB
+    elf:
+      public: MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCt/qwvLBr+WaF2wWS20d1o+FJIkCRBlC43LfXhoJrAivNobGPL1oQDlv7qSofAvuV7DZJjOPq5VdhQtOjNAQGKPtMcsc5IGklKUhLezXP/3x5SD+JAaF9Qrnknqm6jvHVHPjAwTd8PWwZLdhbo/jlObfvUNRKc/+/LrFt/H2F8qwIDAQAB
+      private: MIICdQIBADANBgkqhkiG9w0BAQEFAASCAl8wggJbAgEAAoGBAK3+rC8sGv5ZoXbBZLbR3Wj4UkiQJEGULjct9eGgmsCK82hsY8vWhAOW/upKh8C+5XsNkmM4+rlV2FC06M0BAYo+0xyxzkgaSUpSEt7Nc//fHlIP4kBoX1CueSeqbqO8dUc+MDBN3w9bBkt2Fuj+OU5t+9Q1Epz/78usW38fYXyrAgMBAAECgYBMMib9UXdQw7et5etRFH69pWGDXXxDK71BdOMkt8yNXUxTAoSBk6OkXs+rko/4nKCqTrs4sI878pgUX+VDQZmGVDmIfCVwWkwZT4Tu4TTJbCgC/WSEGo1Am+kPfXYPD13V6Ue3C42Gd6ZttCnwoyGohxVwXExeMaKNJ3sJd6eNAQJBANTZLCk/G2vPZidKarAMrwaq1IPt7SQ8z6/izso8/3k/8eCxuvTTVQyzQZnyg/26uDnzwDgNuVIwr8n6LAM6GAsCQQDRRQC3iC1KWwg07oCMQzhurzm1IgRsQxYyDs5qwlEwJcQM/JUSybPoqmfH4SGzcSyfBEPtEFsdmEzs52ZIEPHhAkAE4aIopADd/RirqAJAXVoaPgq3p9o7bYWZ1ArICpQVVMkYTRsriDk4HFhRzoUGaaTV92geIPpyDxnI+QrPXCK3AkAeJyYiS8HS2+kDz3XAQBNKh372JW+jtcrl7ZI6ecM+/8IO6PoF2gBNPvhzKXI0q9L1GqU67EdkrUQwQmtPaPmhAkB+3qySjhfQ3PYJebxn9WwKHkRZSh89qGYpUB7E7/Max8fXIwxM3ZXF/fjPSkKwdBNFcGiaiFcXl07DpzulYDQW

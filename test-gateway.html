@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Gateway</title>
+</head>
+
+<body>
+    <h1>Gateway Link</h1>
+    <input type="text" id="Gateway">
+    <h1>service host</h1>
+    <input type="text" id="servicehost">
+    <h1>token </h1>
+    <input type="text" id="token" />
+    <br>
+    <br>
+    <input id="submit" type="submit" value="Connect" onclick="onSubmit()"></input>
+
+    <h1 id="status"> nothing</h1>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    window.onload = () =>
+    {
+        let oldG = localStorage.getItem("gateway")
+        let oldS = localStorage.getItem("service")
+        let oldT = localStorage.getItem("token")
+        $("#Gateway").val(oldG)
+        $("#servicehost").val(oldS)
+        $("#token").val(oldT)
+    }
+    function onSubmit()
+    {
+        var gateway = document.getElementById("Gateway")
+        var service = document.getElementById("servicehost")
+        var token = document.getElementById("token")
+        var status = document.getElementById("status")
+        status.innerHTML = "connecting"
+        if (gateway.innerHTML.length < 0 || service.innerHTML.length < 0 || token.innerHTML.length < 0)
+        {
+            status.innerHTML = "check input"
+        }
+        else
+        {
+            status.innerHTML = "connected - wait to load"
+            window.DEBUG_API = true;
+            window.service_host = $("#servicehost").val();
+            window.token = $("#token").val();
+            console.log(window.token)
+            var script = document.createElement('script');
+            script.onload = function ()
+            {
+                try{
+                    $("#submit").css('visibility', "hidden")
+                    window.gameApis = window.getGameApis();
+                    status.innerHTML = "connected \n open console and type : window.gameApis.xxx"
+                } 
+                catch(err)
+                {
+                    status.innerHTML = err
+                }
+            };
+            script.src = $("#Gateway").val();
+            document.body.appendChild(script);
+
+            localStorage.setItem("gateway", $("#Gateway").val())
+            localStorage.setItem("service", $("#servicehost").val())
+            localStorage.setItem("token", $("#token").val())
+        }
+    }
+</script>
+
+</html>
