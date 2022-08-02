@@ -1,0 +1,50 @@
+{
+  "name": "@elofun/myidv2-loadtest",
+  "version": "0.0.10",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "docker-compose -f dev.yml up",
+    "start:dev": "NODE_ENV=development nodemon",
+    "start:prod": "node lib/index.js",
+    "clean": "rm -fr lib",
+    "build": "npm run clean && tsc && npm run build:bundle",
+    "build:bundle": "esbuild lib/index.js --bundle --platform=node --external:./node_modules/*  --outfile=out.js",
+    "docker:release": "npm run docker:build && npm run docker:push",
+    "docker:build": "docker-compose -f build.yml build",
+    "docker:push": "docker-compose -f build.yml push"
+  },
+  "nodemonConfig": {
+    "watch": [
+      "src"
+    ],
+    "ext": "ts",
+    "ignore": [
+      "src/**/*.spec.ts"
+    ],
+    "exec": "ts-node ./src/index.ts",
+    "delay": "2000"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@elofun/elo-protobuf": "^1.0.9",
+    "@elofun/elo-sdk": "^3.0.0",
+    "@elofun/services-wsgw": "^1.2.21",
+    "@types/k6": "^0.37.0",
+    "@types/node": "^17.0.9",
+    "@types/node-fetch": "^2.5.12",
+    "@types/webpack": "^5.28.0",
+    "@types/ws": "^8.2.2",
+    "buffer": "^6.0.3",
+    "esbuild": "^0.14.43",
+    "node-fetch": "^2.6.7",
+    "nodemon": "^2.0.15",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.4",
+    "ws": "^8.4.2"
+  },
+  "devDependencies": {
+    "node-stdlib-browser": "^1.2.0"
+  }
+}

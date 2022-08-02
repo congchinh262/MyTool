@@ -1,0 +1,14 @@
+version: "3.4"
+services:
+  loadtest:
+    image: node:16
+    volumes:
+      - ./:/app
+    working_dir: /app
+    command: bash -c "npm i --unsafe-perm && npm run start:dev"
+    deploy:
+      replicas: 1
+    environment:
+      WSGW_HOST: wss://gami-mvt.elofun.net/wsgw/
+      WEB_HOST: https://gami-mvt.elofun.net/
+      NUM_USERS: 1

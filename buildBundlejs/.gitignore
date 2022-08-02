@@ -1,0 +1,8 @@
+.env
+.npmrc
+.prismaClient
+.DS_Store
+build
+dist
+lib
+node_modules
