@@ -61,7 +61,7 @@ def read_domain_certs(acme_json_path, domain):
     with open(acme_json_path) as acme_json_file:
         acme_json = json.load(acme_json_file)
     
-    certs_json = acme_json['elofun_com']['Certificates']
+    certs_json = acme_json['le']['Certificates']
     domain_certs = [cert['certificate'] for cert in certs_json
                     if cert['domain']['main'] == domain]
 
